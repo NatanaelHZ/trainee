@@ -1,0 +1,15 @@
+/** Meus estilos css**/
+
+.separador {
+  margin-top: 40px;
+}
+
+.my-btn-primary {
+  background-color: #481CA6;
+  color: azure;
+}
+
+.my-btn-primary:hover {
+  background-color: #5c38aa;
+  color: azure;
+}
