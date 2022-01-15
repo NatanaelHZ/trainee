@@ -1,7 +1,8 @@
 /** Meus estilos css**/
 
 .separador {
-  margin-top: 40px;
+  display: block;
+  height: 40px;
 }
 
 .my-btn-primary {
@@ -12,4 +13,11 @@
 .my-btn-primary:hover {
   background-color: #5c38aa;
   color: azure;
+}
+
+.erro-login {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #E74C3C;
+  font-size: large;
 }
