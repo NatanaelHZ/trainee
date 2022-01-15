@@ -1,8 +1,41 @@
 /** Meus estilos css**/
 
+.btn-circle {
+  background-color: #0BD953;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  color: azure;
+}
+
+.btn-circle:hover {
+  background-color: #54e486;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  color: azure;
+}
+
+.adicionar-registro {
+  margin: 28px;
+  float: right;
+}
+
 .separador {
   display: block;
   height: 40px;
+}
+
+.simbolo-logo {
+  margin: 8px;
+}
+
+.title-page {
+  margin-top: 18px;
+}
+
+.my-active {
+  color: #481CA6;
 }
 
 .my-btn-primary {

@@ -16,7 +16,7 @@ if (isset($_POST['acao'])) {
         $_SESSION['nome'] = $resposta['nome'];
         $_SESSION['email'] = $resposta['email'];
 
-        header("Location: views/dashboard.php?acao=minhaconta");
+        header("Location: views/dashboard.php");
       } else if ($resposta['status'] == 'erro') {
         header("Location: index.php?acao=erro");
       }
@@ -35,7 +35,7 @@ if (isset($_POST['acao'])) {
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
