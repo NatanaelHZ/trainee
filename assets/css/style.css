@@ -1,4 +1,7 @@
 /** Meus estilos css**/
+.my-invalid-feedback {
+  color: #E74C3C;
+}
 
 .btn-circle {
   background-color: #0BD953;

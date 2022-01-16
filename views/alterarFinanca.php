@@ -56,7 +56,7 @@ $descricao = (isset($_POST['descricao'])) ? $_POST['descricao'] : $financa->getD
         <div class="col-sm-12">
           <label for="descricao" class="form-label">Descrição</label>
           <input name="descricao" type="text" class="form-control" id="descricao" required value="<?=$descricao?>">
-          <div class="invalid-feedback">
+          <div class="invalid-feedback" id="valida_descricao">
             Preencha a descrição.
           </div>
         </div>

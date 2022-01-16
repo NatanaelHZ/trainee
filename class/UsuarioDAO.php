@@ -29,4 +29,49 @@ class UsuarioDAO {
       echo "Erro ao fazer login: ". $e->getMessage();
     }
   }
+
+  public function buscar($codigo) {
+    try {
+      $consulta = $this->conexao->prepare("
+        SELECT 
+          codigo,
+          nome,
+          email
+        FROM usuarios WHERE codigo=:codigo
+      ");
+      $consulta->bindParam(":codigo", $codigo);
+      $consulta->execute();
+
+      $resultado = $consulta->fetchAll(PDO::FETCH_CLASS, "Usuario");
+      
+      if (count($resultado) == 1)
+        return $resultado[0];
+      else
+        return false;    
+    } catch(PDOException $e) {
+      echo "ERRO: ".$e->getMessage();
+    }
+  }
+
+  public function alterar(Usuario $usuario){
+    try {
+      $consulta = $this->conexao->prepare("
+        update usuarios set 
+          nome=:nome, 
+          senha=:senha, 
+          email=:email
+        where codigo=:codigo
+      ");
+      
+      $consulta->bindValue(":nome", $usuario->getNome());
+      $consulta->bindValue(":senha", $usuario->getSenha());
+      $consulta->bindValue(":email", $usuario->getEmail());
+      $consulta->bindValue(":codigo", $usuario->getCodigo());
+
+      return $consulta->execute();                 
+    } catch(PDOException $e) {
+      echo "ERRO: ".$e->getMessage();
+    } 
+  }
+
 }

@@ -1,15 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dashboard">
+    <meta name="description" content="Usuário">
 
-    <title>Dashboard · Trainee</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
-
-    
+    <title>Finanças · Trainee</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +57,7 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
+            <a class="nav-link" href="dashboard.php">
               <span data-feather="home"></span>
               Dashboard
             </a>
@@ -79,7 +75,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="usuario.php">
+            <a class="nav-link active" aria-current="page" href="#">
               <span data-feather="users"></span>
               Minha conta
             </a>
@@ -95,24 +91,45 @@
       </div>
     </nav>
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Compartilhar</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            Mês
-          </button>
-        </div>
-      </div>
+<?php
+// Controller das finanças
+include_once "../class/Usuario.php";
+include_once "../class/UsuarioDAO.php";
 
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+session_start();
 
-    </main>
+if (!isset($_SESSION['codigo'])) header("Location: ../index.php");
+
+if (!isset($_POST['alterar'])) { //ao carregar formulario
+  $obj = new UsuarioDAO();
+
+  $usuario = $obj->buscar($_SESSION['codigo']);
+
+  if (is_object($usuario)) 
+    include "alterarUsuario.php";
+  else
+    header("Location: usuario.php");
+} else { 
+  $atual = new Usuario();
+  $atual->setCodigo($_POST['codigo']);
+  $atual->setNome($_POST['nome']);
+  $atual->setEmail($_POST['email']);
+  $atual->setSenha($_POST['senha']);
+
+  $erros = $atual->validar();
+
+  if (count($erros) != 0) {
+    include "alterarUsuario.php";
+  }
+  else{
+    $bd = new UsuarioDAO();
+
+    if ($bd->alterar($atual))
+      header("Location: usuario.php");
+  }
+}
+
+?>
   </div>
 </div>
 

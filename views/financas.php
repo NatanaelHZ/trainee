@@ -13,6 +13,8 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     
+    <link rel="stylesheet" href="../assets/css/style.css">
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -75,7 +77,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="usuario.php">
               <span data-feather="users"></span>
               Minha conta
             </a>

@@ -38,4 +38,9 @@ class Usuario {
   public function setSenha($senha) {
     $this->senha = password_hash(filter_var($senha, FILTER_SANITIZE_STRING), PASSWORD_DEFAULT);
   }
+
+  public function validar() {
+    return array();
+  }
+
 }

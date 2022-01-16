@@ -19,7 +19,7 @@ var_dump($codigo_categoria);
   <div class="separador"></div>
 
   <div class="col-md-7 col-lg-8">
-    <form action="#" method="post">
+    <form action="#" method="post" id="form_crud">
       <div class="row g-3">
 
         <div class="col-md-4 col-sm-12">
@@ -55,10 +55,8 @@ var_dump($codigo_categoria);
 
         <div class="col-sm-12">
           <label for="descricao" class="form-label">Descrição</label>
-          <input name="descricao" type="text" class="form-control" id="descricao" required value="<?=$descricao?>">
-          <div class="invalid-feedback">
-            Preencha a descrição.
-          </div>
+          <input name="descricao" type="text" class="form-control" id="descricao" value="<?=$descricao?>">
+          <p class="text-danger" id="valida_descricao"></p>
         </div>
 
       </div>
@@ -87,3 +85,5 @@ if (isset($erros) && count($erros) != 0) {
 ?>
 
 </main>
+
+<script src="../assets/js/financas.js"></script>

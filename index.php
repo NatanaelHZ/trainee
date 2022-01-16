@@ -12,6 +12,7 @@ if (isset($_POST['acao'])) {
 
     if (isset($resposta['status'])) {
       if ($resposta['status'] == 'sucesso') {
+        session_start();
         $_SESSION['codigo'] = $resposta['codigo'];
         $_SESSION['nome'] = $resposta['nome'];
         $_SESSION['email'] = $resposta['email'];
