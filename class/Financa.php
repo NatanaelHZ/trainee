@@ -31,7 +31,7 @@ class Financa {
   }
 
   public function setData($data) {
-    $this->data = filter_var($data, FILTER_SANITIZE_STRING);
+    $this->data = $data;
   }
 
   public function getValor() {
@@ -39,10 +39,9 @@ class Financa {
   }
 
   public function setValor($valor) {
-    $this->valor = password_hash(filter_var($valor, FILTER_SANITIZE_STRING), PASSWORD_DEFAULT);
+    $this->valor = $valor;
   }
 
-  
   public function getCodigoCategoria() {
     return $this->codigo_categoria;
   }
@@ -56,7 +55,7 @@ class Financa {
   }
 
   public function setNomeCategoria($nome_categoria) {
-    $this->nome_categoria = filter_var($nome_categoria, FILTER_SANITIZE_STRING);
+    $this->nome_categoria = $nome_categoria;
   }
 
   public function getTipoCategoria() {
@@ -64,12 +63,16 @@ class Financa {
   }
 
   public function setTipoCategoria($tipo_categoria) {
-    $this->tipo_categoria = filter_var($tipo_categoria, FILTER_SANITIZE_STRING);
+    $this->tipo_categoria = $tipo_categoria;
   }
 
   public function getDataFormatada() {
     $data = date_create($this->getData());
 
     return date_format($data, 'd/m/Y');
+  }
+
+  public function validar() {
+    return array();
   }
 }

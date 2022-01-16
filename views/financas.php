@@ -1,16 +1,3 @@
-<?php
-// Controller das finanças
-include_once "../class/FinancaDAO.php";
-
-if (!isset($_GET['acao'])) {
-  $Financa = new FinancaDAO();
-  $lista = $Financa->listar();
-} else {
-  echo 'Opss...';
-}
-
-?>
-
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -104,51 +91,126 @@ if (!isset($_GET['acao'])) {
       </div>
     </nav>
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <h2 class="title-page">Finanças</h2>
+<?php
+// Controller das finanças
+include_once "../class/Financa.php";
+include_once "../class/FinancaDAO.php";
 
-      <div class="fixed-bottom">
-        <div class="adicionar-registro">
-          <button type="button" class="btn btn-circle mr-3 d-flex justify-content-center align-items-center"><i class="bi bi-plus-lg"></i></button>
-        </div>
-      </div>
+if (!isset($_GET['acao'])) {
+  $Financa = new FinancaDAO();
+  $lista = $Financa->listar();
 
-      <?php
-      if (count($lista) == 0) {
-        echo "<p>Nenhum registro</p>";
-      } else {
-      ?>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Descrição</th>
-              <th scope="col">Categoria</th>
-              <th scope="col">Data</th>
-              <th scope="col">Valor</th>
-              <th scope="col">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            foreach ($lista as $item) {
-            ?>
-            <tr>
-              <td><span style="color: <?= ($item->getTipoCategoria() == 'D' ? '#F24949' : '#0BD953') ?>" data-feather="<?= ($item->getTipoCategoria() == 'D' ? 'arrow-down' : 'arrow-up') ?>"></span></td>
-              <td><?=$item->getDescricao()?></td>
-              <td><?=$item->getNomeCategoria()?></td>
-              <td><?=$item->getDataFormatada()?></td>
-              <td>R$ <?=number_format($item->getValor(), 2, ',', '.')?></td>
-              <td>R$ <?=$item->getCodigoCategoria()?></td>
-            </tr>
-            <?php } ?>
-          </tbody>
-        </table>
-      </div>
-      <?php } ?>
+  include "listaFinanca.php";
+} else {   
+  switch ($_GET['acao']) {
+    case 'cadastra':
+      if (!isset($_POST['cadastrar'])) { //Carregar formulário");
+        include "cadastrarFinanca.php";
+      } else { //Feito submit dos dados
+        $novo = new Financa();
+        $novo->setCodigoCategoria($_POST['codigo_categoria']);
+        $novo->setData($_POST['data']);
+        $novo->setValor($_POST['valor']);
+        $novo->setDescricao($_POST['descricao']);
 
-    </main>
+        $erros = $novo->validar();
+
+        if (count($erros) != 0) { //Erro na validação de campos
+          include "cadastrarFinanca.php";
+        } else {
+          $bd = new FinancaDAO();
+
+          if ($bd->inserir($novo))
+            header("Location: financas.php");
+        } 
+      }
+
+      break;
+    case 'altera':
+        /*$titulo = "Alteração de Sabor";
+        if(!isset($_POST['alterar'])) { //ao carregar formulario
+            $obj = new SaborDAO();
+            $sabor = $obj->buscar($_GET['cod']);
+            if(is_object($sabor)) // registro com aquele codigo existe
+                include "views/alteraSabor.php";
+            else // retornou falso; codigo nao existe na tabela
+                header("Location: adm_sabor.php");     
+        }
+        else { // apos submeter os dados 
+            $atual = new Sabor();
+            $atual->setNome($_POST['field_nome']);
+            $atual->setIngredientes($_POST['field_ingredientes']);
+            $atual->setNomeImagem($_FILES['field_imagem']['name']);
+            $atual->setCodigo($_POST['cod']);
+            $erros = $atual->validate();
+            if(count($erros) != 0){ // algum campo não validou
+                include "views/alteraSabor.php";
+            }
+            else{
+                //sem erros de validacao, fazer o upload
+                $destino = "../assets/images/".$_FILES['field_imagem']['name'];
+                if(move_uploaded_file($_FILES['field_imagem']['tmp_name'], $destino)){
+                    // upload bem sucedido, altera no BD
+                    $bd = new SaborDAO();
+                    if($bd->alterar($atual))
+                        header("Location: adm_sabor.php");
+                }
+            } 
+        }   */                     
+        break;
+
+    
+    case 'exclui':
+        /*//$titulo = "Exclusão de Sabor";
+        $bd = new SaborDAO();
+        $retorno = $bd->excluir($_GET['cod']);
+        if(is_bool($retorno))
+            header("Location: adm_sabor.php");
+        else{
+            echo "<p>$retorno</p>";
+        }    */
+        break;
+    
+    default:
+        echo "Ação não permitida";  
+                    
+  }// fim switch
+} // fim else
+
+/*
+if (isset($_POST['acao'])) {   
+	switch($_POST['acao']) {
+    case 'cadastra':  
+        $novo = new Financa();
+        $novo->setCodigoCategoria($_POST['codigo_categoria']);
+        $novo->setData($_POST['data']);
+        $novo->setValor($_POST['valor']);
+        $novo->setDescricao($_POST['descricao']);
+       // var_dump($novo);
+        $erros = $novo->validar();
+
+          $bd = new FinancaDAO();
+          $bd->inserir($novo);
+
+          //header("Location: financas.php");
+        
+      break;
+
+    case 'altera':              
+      break;
+
+    case 'exclui':
+      break;
+    
+    default:
+      echo "Ação não permitida";
+  }
+} else {
+  $Financa = new FinancaDAO();
+  $lista = $Financa->listar();
+}
+*/
+?>
   </div>
 </div>
 

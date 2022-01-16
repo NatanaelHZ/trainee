@@ -48,6 +48,16 @@
   color: azure;
 }
 
+.my-btn-save {
+  background-color: #0BD953;
+  color: azure;
+}
+
+.my-btn-save:hover {
+  background-color: #54e486;
+  color: azure;
+}
+
 .erro-login {
   margin-top: 10px;
   margin-bottom: 10px;

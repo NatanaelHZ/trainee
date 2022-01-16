@@ -10,8 +10,8 @@ class FinancaDAO {
     $this->conexao = Conexao::conecta();
   }
 
-  public function listar(){
-    try{
+  public function listar() {
+    try {
         $consulta = $this->conexao->prepare("
           SELECT 
             F.codigo,
@@ -34,5 +34,29 @@ class FinancaDAO {
     catch(PDOException $e){
         echo "ERRO: ".$e->getMessage();
     }
-}
+  }
+
+  public function inserir(Financa $financa){
+    try {
+      $consulta = $this->conexao->prepare("
+        insert into financas values (
+          NULL, 
+          :descricao, 
+          :data, 
+          :valor, 
+          :codigo_categoria,
+          NULL)"
+      );
+
+      $consulta->bindValue(":codigo_categoria", $financa->getCodigoCategoria());
+      $consulta->bindValue(":data", $financa->getData());
+      $consulta->bindValue(":valor", $financa->getValor());
+      $consulta->bindValue(":descricao", $financa->getDescricao());
+
+      return $consulta->execute();                 
+    }
+    catch(PDOException $e) {
+      echo "ERRO: ".$e->getMessage();
+    }                
+  }
 }
