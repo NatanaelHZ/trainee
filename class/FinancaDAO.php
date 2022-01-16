@@ -107,6 +107,6 @@ class FinancaDAO {
     } catch (PDOException $e) {
       return "Erro ao deletar finança: " . $e->getMessage();
     }               
-}
+  }
 
 }

@@ -69,7 +69,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="categorias.php">
               <span data-feather="tag"></span>
               Categorias
             </a>
@@ -173,40 +173,6 @@ if (!isset($_GET['acao'])) {
                     
   }// fim switch
 } // fim else
-
-/*
-if (isset($_POST['acao'])) {   
-	switch($_POST['acao']) {
-    case 'cadastra':  
-        $novo = new Financa();
-        $novo->setCodigoCategoria($_POST['codigo_categoria']);
-        $novo->setData($_POST['data']);
-        $novo->setValor($_POST['valor']);
-        $novo->setDescricao($_POST['descricao']);
-       // var_dump($novo);
-        $erros = $novo->validar();
-
-          $bd = new FinancaDAO();
-          $bd->inserir($novo);
-
-          //header("Location: financas.php");
-        
-      break;
-
-    case 'altera':              
-      break;
-
-    case 'exclui':
-      break;
-    
-    default:
-      echo "Ação não permitida";
-  }
-} else {
-  $Financa = new FinancaDAO();
-  $lista = $Financa->listar();
-}
-*/
 ?>
   </div>
 </div>

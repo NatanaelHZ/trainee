@@ -30,4 +30,8 @@ class Categoria {
     $this->tipo = $tipo;
   }
 
+  public function validar() {
+    return array();
+  }
+  
 }

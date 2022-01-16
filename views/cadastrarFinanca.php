@@ -3,7 +3,7 @@
 include_once "../class/CategoriaDAO.php";
 
 $Categoria = new CategoriaDAO();
-$categorias = $Categoria->listar();
+$categorias = $Categoria->listarEspecifico();
 
 $codigo_categoria = (isset($_POST['codigo_categoria'])) ? $_POST['codigo_categoria'] : "";
 $data = (isset($_POST['data'])) ? $_POST['data'] : "";

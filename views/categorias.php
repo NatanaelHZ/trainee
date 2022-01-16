@@ -1,15 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dashboard">
+    <meta name="description" content="Categorias">
 
-    <title>Dashboard · Trainee</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
-
-    
+    <title>Finanças · Trainee</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +57,7 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
+            <a class="nav-link" href="dashboard.php">
               <span data-feather="home"></span>
               Dashboard
             </a>
@@ -73,7 +69,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="categorias.php">
+            <a class="nav-link  active" aria-current="page" href="#">
               <span data-feather="tag"></span>
               Categorias
             </a>
@@ -95,24 +91,85 @@
       </div>
     </nav>
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Compartilhar</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            Mês
-          </button>
-        </div>
-      </div>
+<?php
+// Controller das finanças
+include_once "../class/Categoria.php";
+include_once "../class/CategoriaDAO.php";
 
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+if (!isset($_GET['acao'])) {
+  $Categoria = new CategoriaDAO();
+  $lista = $Categoria->listar();
 
-    </main>
+  include "listaCategoria.php";
+} else {   
+  switch ($_GET['acao']) {
+    case 'cadastra':
+      if (!isset($_POST['cadastrar'])) { //Carregar formulário");
+        include "cadastrarCategoria.php";
+      } else { //Feito submit dos dados
+        $novo = new Categoria();
+        $novo->setTipo($_POST['tipo']);
+        $novo->setNome($_POST['nome']);
+
+        $erros = $novo->validar();
+
+        if (count($erros) != 0) { //Erro na validação de campos
+          include "cadastrarCategoria.php";
+        } else {
+          $bd = new CategoriaDAO();
+
+          if ($bd->inserir($novo))
+            header("Location: categorias.php");
+        } 
+      }
+
+      break;
+    case 'altera':
+      if (!isset($_POST['alterar'])) { //ao carregar formulario
+          $obj = new CategoriaDAO();
+
+          $categoria = $obj->buscar($_GET['codigo']);
+
+          if (is_object($categoria)) 
+            include "alterarCategoria.php";
+          else
+            header("Location: categorias.php");     
+      } else { 
+        $atual = new Categoria();
+        $atual->setCodigo($_POST['codigo']);
+        $atual->setTipo($_POST['tipo']);
+        $atual->setNome($_POST['nome']);
+
+        $erros = $atual->validar();
+
+        if (count($erros) != 0) {
+          include "alterarCategoria.php";
+        }
+        else{
+          $bd = new CategoriaDAO();
+
+          if ($bd->alterar($atual))
+            header("Location: categorias.php");
+        }
+      }
+           
+      break;
+    case 'exclui':
+      $bd = new CategoriaDAO();
+      $retorno = $bd->excluir($_GET['codigo']);
+
+      if (is_bool($retorno))
+        header("Location: categorias.php");
+      else 
+        echo "<p>$retorno</p>";
+  
+      break;
+    default:
+      echo "Ação não permitida";  
+                    
+  }
+}
+?>
   </div>
 </div>
 

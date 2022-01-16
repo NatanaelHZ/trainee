@@ -14,7 +14,7 @@ $descricao = (isset($_POST['descricao'])) ? $_POST['descricao'] : $financa->getD
 ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-  <h3 class="title-page"><i class="bi bi-plus"></i> Nova Finança</h3>
+  <h3 class="title-page"><i class="bi bi-pencil"></i> Alterar Finança</h3>
 
   <div class="separador"></div>
 
