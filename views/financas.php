@@ -127,50 +127,47 @@ if (!isset($_GET['acao'])) {
 
       break;
     case 'altera':
-        /*$titulo = "Alteração de Sabor";
-        if(!isset($_POST['alterar'])) { //ao carregar formulario
-            $obj = new SaborDAO();
-            $sabor = $obj->buscar($_GET['cod']);
-            if(is_object($sabor)) // registro com aquele codigo existe
-                include "views/alteraSabor.php";
-            else // retornou falso; codigo nao existe na tabela
-                header("Location: adm_sabor.php");     
+      if (!isset($_POST['alterar'])) { //ao carregar formulario
+          $obj = new FinancaDAO();
+
+          $financa = $obj->buscar($_GET['codigo']);
+
+          if (is_object($financa)) 
+            include "alterarFinanca.php";
+          else
+            header("Location: financas.php");     
+      } else { 
+        $atual = new Financa();
+        $atual->setCodigo($_POST['codigo']);
+        $atual->setCodigoCategoria($_POST['codigo_categoria']);
+        $atual->setData($_POST['data']);
+        $atual->setValor($_POST['valor']);
+        $atual->setDescricao($_POST['descricao']);
+
+        $erros = $atual->validar();
+
+        if (count($erros) != 0) {
+          include "alterarFinanca.php";
         }
-        else { // apos submeter os dados 
-            $atual = new Sabor();
-            $atual->setNome($_POST['field_nome']);
-            $atual->setIngredientes($_POST['field_ingredientes']);
-            $atual->setNomeImagem($_FILES['field_imagem']['name']);
-            $atual->setCodigo($_POST['cod']);
-            $erros = $atual->validate();
-            if(count($erros) != 0){ // algum campo não validou
-                include "views/alteraSabor.php";
-            }
-            else{
-                //sem erros de validacao, fazer o upload
-                $destino = "../assets/images/".$_FILES['field_imagem']['name'];
-                if(move_uploaded_file($_FILES['field_imagem']['tmp_name'], $destino)){
-                    // upload bem sucedido, altera no BD
-                    $bd = new SaborDAO();
-                    if($bd->alterar($atual))
-                        header("Location: adm_sabor.php");
-                }
-            } 
-        }   */                     
-        break;
+        else{
+          $bd = new FinancaDAO();
+
+          if ($bd->alterar($atual))
+            header("Location: financas.php");
+        }
+      }
+           
+      break;
     case 'exclui':
-        $bd = new FinancaDAO();
-        $retorno = $bd->excluir($_GET['codigo']);
+      $bd = new FinancaDAO();
+      $retorno = $bd->excluir($_GET['codigo']);
 
-        var_dump("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
-        if (is_bool($retorno))
-          header("Location: financas.php");
-        else 
-          echo "<p>$retorno</p>";
-   
-        break;
-    
+      if (is_bool($retorno))
+        header("Location: financas.php");
+      else 
+        echo "<p>$retorno</p>";
+  
+      break;
     default:
         echo "Ação não permitida";  
                     
