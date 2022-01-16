@@ -28,13 +28,16 @@
         <?php
         foreach ($lista as $item) {
         ?>
-        <tr>
+        <tr class="align-middle">
           <td><span style="color: <?= ($item->getTipoCategoria() == 'D' ? '#F24949' : '#0BD953') ?>" data-feather="<?= ($item->getTipoCategoria() == 'D' ? 'arrow-down' : 'arrow-up') ?>"></span></td>
           <td><?=$item->getDescricao()?></td>
           <td><?=$item->getNomeCategoria()?></td>
           <td><?=$item->getDataFormatada()?></td>
           <td>R$ <?=number_format($item->getValor(), 2, ',', '.')?></td>
-          <td>R$ <?=$item->getCodigoCategoria()?></td>
+          <td>
+            <a href="financas.php?acao=altera&codigo=<?=$item->getCodigo()?>" class="btn btn-outline-success btn-sm justify-content-center align-items-center"><i class="bi bi-pencil-fill"></i></a>
+            <a href="financas.php?acao=exclui&codigo=<?=$item->getCodigo()?>" class="btn btn-outline-danger btn-sm justify-content-center align-items-center"><i class="bi bi-trash-fill"></i></a>
+          </td>
         </tr>
         <?php } ?>
       </tbody>

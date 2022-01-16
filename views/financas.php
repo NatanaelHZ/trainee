@@ -158,17 +158,17 @@ if (!isset($_GET['acao'])) {
             } 
         }   */                     
         break;
-
-    
     case 'exclui':
-        /*//$titulo = "Exclusão de Sabor";
-        $bd = new SaborDAO();
-        $retorno = $bd->excluir($_GET['cod']);
-        if(is_bool($retorno))
-            header("Location: adm_sabor.php");
-        else{
-            echo "<p>$retorno</p>";
-        }    */
+        $bd = new FinancaDAO();
+        $retorno = $bd->excluir($_GET['codigo']);
+
+        var_dump("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+        if (is_bool($retorno))
+          header("Location: financas.php");
+        else 
+          echo "<p>$retorno</p>";
+   
         break;
     
     default:

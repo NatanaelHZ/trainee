@@ -59,4 +59,17 @@ class FinancaDAO {
       echo "ERRO: ".$e->getMessage();
     }                
   }
+
+  public function excluir($cod) {
+    try {
+      $consulta = $this->conexao->prepare("delete from financas where codigo=:cod");
+      $consulta->bindParam(":cod", $cod);
+
+      return $consulta->execute();
+    }
+    catch (PDOException $e) {
+      return "Erro ao deletar finança: " . $e->getMessage();
+    }               
+}
+
 }
