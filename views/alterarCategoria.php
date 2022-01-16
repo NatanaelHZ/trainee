@@ -28,7 +28,7 @@ $nome = (isset($_POST['nome'])) ? $_POST['nome'] : $categoria->getNome();
         </div>
 
         <div class="col-md-6 col-sm-12">
-          <label for="nome" class="form-label">Data</label>
+          <label for="nome" class="form-label">Nome</label>
           <input name="nome" type="text" class="form-control" id="nome" required value="<?=$nome?>">
           <div class="invalid-feedback">
             Preencha a nome.
