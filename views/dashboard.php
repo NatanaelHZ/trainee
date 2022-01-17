@@ -110,7 +110,56 @@
         </div>
       </div>
 
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+      <div class="d-flex justify-content-center align-items-center">
+        <div id="load_page" class="spinner-border" style="width: 4rem; height: 4rem; margin-top: 10%;" role="status"></div>   
+      </div>
+
+      <canvas class="my-4 w-100" id="myChart" width="900" height="240"></canvas>
+
+      <div class="row">
+
+        <div class="col-md-3 col-sm-12">
+          <div class="card mb-3" style="max-width: 18rem; border-color: #0BD953;">
+            <div class="card-body" style="color: #0BD953;">
+              <h5 class="card-text"><i class="bi bi-arrow-up"></i>Receitas</h5>
+              <h2 class="card-title">R$ 2200,00</h2>
+              <p class="card-text">Mês Atual</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-12">
+          <div class="card mb-3" style="max-width: 18rem; border-color: #E74C3C;">
+            <div class="card-body" style="color: #E74C3C;">
+              <h5 class="card-text"><i class="bi bi-arrow-down"></i>Depesas</h5>
+              <h2 class="card-title">R$ 1200,00</h2>
+              <p class="card-text">Mês Atual</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-12">
+          <div class="card mb-3" style="max-width: 18rem; border-color: #481CA6;">
+            <div class="card-body" style="color: #481CA6;">
+              <h5 class="card-text"><i class="bi bi-piggy-bank"></i> Saldo</h5>
+              <h2 class="card-title">R$ 1000,00</h2>
+              <p class="card-text">Mês Atual</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-12">
+          <div class="card border-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-body text-secondary">
+              <h5 class="card-text"><i class="bi bi-wallet2"></i> Saldo Ano</h5>
+              <h2 class="card-title">R$ 1200,00</h2>
+              <p class="card-text">Ano Atual</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
 
     </main>
   </div>

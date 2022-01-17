@@ -10,8 +10,10 @@ req.onreadystatechange = function() {
 };
 
 setTimeout(() => {
+ 
+  document.getElementById("load_page").style.display = "none";
   // Graphs
-  var ctx = document.getElementById('myChart')
+  var ctx = document.getElementById('myChart');
   // eslint-disable-next-line no-unused-vars
   var myChart = new Chart(ctx, {
     type: 'line',
@@ -47,9 +49,9 @@ setTimeout(() => {
         ],
         lineTension: 0,
         backgroundColor: 'transparent',
-        borderColor: '#007bff',
+        borderColor: '#481CA6',
         borderWidth: 4,
-        pointBackgroundColor: '#007bff'
+        pointBackgroundColor: '#481CA6'
       }]
     },
     options: {

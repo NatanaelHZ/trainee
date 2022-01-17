@@ -38,7 +38,7 @@
 }
 
 .my-active {
-  color: #481CA6;
+  color: #481CA6 !important;
 }
 
 .my-btn-primary {
