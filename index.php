@@ -26,11 +26,16 @@ if (isset($_POST['acao'])) {
       header("Location: index.php?acao=falha");
     }
   }
-} elseif (isset($_GET['acao'])) {
+} else if (isset($_GET['acao'])) {
   if ($_GET['acao'] == 'erro')
     $erro = 'Usuário ou Senha inválido*';
   else if ($_GET['acao'] == 'falha')
     $erro = 'Falha: tente novamente mais tarde';
+  else if ($_GET['acao'] == 'sair') {
+    session_start();
+    session_destroy();
+    header("Location: index.php");
+  }
 }
 
 ?>

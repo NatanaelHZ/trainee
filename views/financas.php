@@ -48,7 +48,7 @@
   <input class="form-control form-control-dark w-100" type="text" placeholder="Pesquisar" aria-label="Search">
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sair <i class="bi bi-door-closed"></i></a> 
+      <a class="nav-link px-3" href="../index.php?acao=sair">Sair <i class="bi bi-door-closed"></i></a>
     </div>
   </div>
 </header>
