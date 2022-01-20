@@ -68,22 +68,3 @@ setTimeout(() => {
     }
   });
 }, 1000);
-
-/*
-
-
-// ajax
-let req = new XMLHttpRequest();
-req.open("GET", "ajax/tamanho.php?sigla="+selectedSize, true);
-req.send();
-req.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200){
-        let dados = JSON.parse(this.responseText);
-        numOpcoes = dados.numOpcoes;
-        document.getElementById("mostraPreco").innerHTML = parseFloat(dados.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        document.getElementById("limiteSabores").innerHTML = dados.numOpcoes;
-        document.getElementById("preco").value = dados.preco;
-        document.getElementById("codTamanho").value = dados.codigo;
-        document.getElementById("nomeTamanho").value = dados.nome;
-    }
-};*/
